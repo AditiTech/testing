@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="assets/css/jquery-ui.css">
     <link rel="stylesheet" href="assets/css/custom.css" >
 
-    <title>Anand Calculator</title>
+    <title>Anand Calculator - 814 plan</title>
   </head>
 <body>
 
