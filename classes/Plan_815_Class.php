@@ -2,11 +2,12 @@
 /**
 * 
 */
-class Plan_815 extends Calculation
+class Plan_815 extends Endowment
 {
 	
     function __construct( $id='' )
     {
+        $this->plan = 815;
         parent::__construct(); 
     }
 
@@ -181,8 +182,65 @@ class Plan_815 extends Calculation
         $this->dsa = $this->bsa + $this->amount;
 
         $this->bonus_amount =  $this->bonus/1000 * $this->amount * $this->term;
+
+        $this->normal_risk_cover = $this->bsa + $this->bonus_amount + $this->fab_amount;
+        $this->accident_risk_cover = $this->dsa + $this->bonus_amount + $this->fab_amount;
     }
 
+    public function risk_cover_table()
+    {   
+        
+        $rc_template = '<div class="row">  
+          
+        <table class="table table-bordered table-responsive col-6 border-0 text-center tab_normal_death">
+          <tbody style="float:right;">
+          <tr>
+            <td><b>If death occurs at age <span id="s_age">'.$this->age.'</span></b></td>
+          </tr>
+          <tr>
+            <td class="text-blue" id="death_occures_formula_text"><b>(BSA + Bonus + FAB)</b></td>
+          </tr>
+          <tr>
+            <td><b><span id="bsa"> Rs. '.$this->IND_money_format($this->bsa).'</span></b></td>
+          </tr>
+          <tr>
+            <td><b><span class="d_bonus_amount" > + Rs. '.$this->IND_money_format($this->bonus_amount).'</span></b></td>
+          </tr>
+          <tr>
+            <td><b><span class="d_fab_amount" > + Rs. '.$this->IND_money_format($this->fab_amount).'</span></b></td>
+          </tr>
+          <tr>
+            <td class="text-danger"><b><span id="normal_risk_cover" > = Rs. '.$this->IND_money_format($this->normal_risk_cover).'</span></b></td>
+          </tr>
+          </tbody>
+        </table>
+
+        <table class="table table-bordered table-responsive col-6 border-0 text-white text-center tab_accident_death">
+          <tbody class="bg-danger ">
+          <tr>
+            <td><b>In case of accidental death</b></td>
+          </tr>
+          <tr>
+            <td class="text-yellow"><b>(DSA + Bonus + FAB)</b></td>
+          </tr>
+          <tr>
+            <td><b><span id="dsa"> Rs. '.$this->IND_money_format($this->dsa).'</span></b></td>
+          </tr>
+          <tr>
+            <td><b><span class="d_bonus_amount" > + Rs. '.$this->IND_money_format($this->bonus_amount).'</span></b></td>
+          </tr>
+          <tr>
+            <td><b><span class="d_fab_amount" > + Rs. '.$this->IND_money_format($this->fab_amount).'</span></b></td>
+          </tr>
+          <tr>
+            <td><b><span id="accident_risk_cover" > = Rs. '.$this->IND_money_format($this->accident_risk_cover).'</span></b></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>';
+        return $rc_template;
+        
+    }
     
 }
 ?>
