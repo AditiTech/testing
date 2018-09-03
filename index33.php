@@ -41,7 +41,6 @@
                           <option value="">Select plan</option>
                           <option value="814">New Endowment Plan (814)</option>
                           <option value="815">New Jeevan Anand (815)</option>
-                          <option value="827">Jeevan Rakshak (827)</option>
                       </select>
                     </div>
 
@@ -57,7 +56,7 @@
 
                     <div class="form-group col-md-2">
                       <input type="number" class="col-md-12 form-control" id="sa" name="sa" placeholder="Enter sum assured" value="100000">
-                      
+                      <span class="err-txt-centr text-danger" id="sa_err" style="display: none;"></span>
                     </div>
 
                     <div class="form-group col-md-2">
@@ -74,7 +73,10 @@
                          <button type="submit" class="btn btn-primary" id="btn-submit">Submit</button>
                          <input type="hidden" name="formType" value="calculate">
                      </div>
-                     <span class="err-txt-centr pt-md-2 text-danger" id="sa_err" style="display: none;"></span>
+                  
+                  
+                  
+                    
                 </form>
             </div>
 
@@ -104,9 +106,6 @@
             <tr>
               <td>FAB* = <span id="txtFAB">25</span></td>
             </tr>
-            <tr>
-              <td>LA* = <span id="txtLA">25</span></td>
-            </tr>
           </tbody></table>
        
        
@@ -117,7 +116,7 @@
         <div class="col-md-7 mt-1 text-blue cal-div"> <!-- text -->
         <div class="row">
             <div class="col-md-5">
-            <p class="float-left font-weight-bold fs-24" id="maturity_benefit_formula">Maturity Benefit <br>= SA <br>+ Bonus <br>+ FAB</p>
+            <p class="float-left font-weight-bold fs-24">Maturity Benefit <br>= SA <br>+ Bonus <br>+ FAB</p>
             <img src="images/lic-family.png" class="lic-family-img" alt="familyilic">
            </div>
           
@@ -134,10 +133,6 @@
           <li class="bg-danger border-left-radius font-weight-bold list-group-item mb-1 mt-1 pt-1 pb-1"> 
             + Rs. <span id="txtFABAmount">50,000</span>
             <span class="badge float-right badge-pill">FAB</span>
-          </li>
-          <li class="bg-danger border-left-radius font-weight-bold list-group-item mb-1 mt-1 pt-1 pb-1"> 
-            + Rs. <span id="txtLAAmount">50,000</span>
-            <span class="badge float-right badge-pill">LA</span>
           </li>
           <li class="bg-danger border-left-radius font-weight-bold list-group-item mb-1 mt-1 pt-1 pb-1"> 
               = Rs. <span id="txtMaturityBenefit">39,40,000</span>
@@ -172,25 +167,16 @@
     <div class="container-fluid h6 cal-div" >
       <div class="row">
         <div class="col-md-12">
-          <table class="border-secondary col-md-4 offset-md-2 table table-bordered text-center">
-            <tbody>
-              <tr>
-                <th></th>
-                <th>Half Yearly</th>
-                <th>Quarterly</th>
-                <th>Monthly</th>
-              </tr>
-            <tr class="">
-              <td>First Year</td>
-              <td class=""><span id="half_prem_first"></span></td>
-              <td><span id="quarterly_prem_first"></span></td>
-              <td><span id="monthly_prem_first"></span></td>
+          <table class="border-secondary table table-bordered text-center">
+            <tbody><tr class="">
+              <td class="">Half yearly Premium : <span id="half_prem_first"></span></td>
+              <td>Quarterly Premium : <span id="quarterly_prem_first"></span></td>
+              <td>Monthly Premium : <span id="monthly_prem_first"></span></td>
             </tr>
             <tr>
-              <td>Subsequent Year</td>
-              <td><span id="half_prem_later"></span></td>
-              <td><span id="quarterly_prem_later"></span></td>
-              <td><span id="monthly_prem_later"></span></td>
+              <td>Subsequent Half yearly Premium : <span id="half_prem_later"></span></td>
+              <td>Subsequent Quarterly Premium : <span id="quarterly_prem_later"></span></td>
+              <td>Subsequent Monthly Premium : <span id="monthly_prem_later"></span></td>
             </tr>
           </tbody></table>
         </div>
@@ -202,8 +188,55 @@
 
 
   <div class="risk_result mb-2 mt-2">
-
-  </div>
+          
+        <div class="row">  
+          
+        <table class="table table-bordered table-responsive col-6 border-0 text-center">
+          <tbody style="float:right;">
+          <tr>
+            <td><b>If death occurs at age <span id="s_age"></span></b></td>
+          </tr>
+          <tr>
+            <td class="text-blue" id="death_occures_formula_text"><b>(BSA + Bonus + FAB)</b></td>
+          </tr>
+          <tr>
+            <td><b><span id="bsa"></span></b></td>
+          </tr>
+          <tr>
+            <td><b><span class="d_bonus_amount" ></span></b></td>
+          </tr>
+          <tr>
+            <td><b><span class="d_fab_amount" ></span></b></td>
+          </tr>
+          <tr>
+            <td class="text-danger"><b><span id="normal_risk_cover" ></span></b></td>
+          </tr>
+          </tbody>
+        </table>
+        <table class="table table-bordered table-responsive col-6 border-0 text-white text-center">
+          <tbody class="bg-danger ">
+          <tr>
+            <td><b>In case of accidental death</b></td>
+          </tr>
+          <tr>
+            <td class="text-yellow"><b>(DSA + Bonus + FAB)</b></td>
+          </tr>
+          <tr>
+            <td><b><span id="dsa"></span></b></td>
+          </tr>
+          <tr>
+            <td><b><span class="d_bonus_amount" ></span></b></td>
+          </tr>
+          <tr>
+            <td><b><span class="d_fab_amount" ></span></b></td>
+          </tr>
+          <tr>
+            <td><b><span id="accident_risk_cover" ></span></b></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
 
 
 
@@ -247,19 +280,15 @@ $(document).ready(function(){
   var sa = $("#sa");
   var term = $("#term");
 
-  var AGE_LIMIT = 0;
-  var MAX_AGE = 0;
+  var MAX_AGE = 75;
   var MIN_AGE = 0;
 
   var MAX_TERM = 0;
   var MIN_TERM = 0;
 
-  var MIN_SA  = 0; 
-  var MAX_SA  = 0; 
+  var MIN_SA_ERR = 'Minimum Sum Assured is 100000';
 
   var MULTIPLE_OF_ERR = 'Sum Assured should be in multiples of 5000.';
-
-
 
   plan.change(function(){
 
@@ -271,22 +300,11 @@ $(document).ready(function(){
           if( plan_val == '814') 
           {
               MAX_AGE = 55; MIN_AGE = 8; MAX_TERM = 35; MIN_TERM = 12;
-              MIN_SA = 100000;
-              AGE_LIMIT = 75;
           } 
           else if( plan_val == '815') 
           {
               MAX_AGE = 50; MIN_AGE = 18; MAX_TERM = 35; MIN_TERM = 15;
-              MIN_SA = 100000;
-              AGE_LIMIT = 75;
           }
-          else if( plan_val == '827') 
-          {
-              MAX_AGE = 55; MIN_AGE = 8; MAX_TERM = 20; MIN_TERM = 10;
-              MIN_SA = 75000; MAX_SA = 200000;
-              AGE_LIMIT = 70;
-          }
-
           for( i = MIN_AGE; i <= MAX_AGE; i++)
           {
             opt += '<option value="'+i+'">'+i+'</option>';
@@ -303,7 +321,7 @@ $(document).ready(function(){
       var age_val = age.val();
       var opt = '<option value="">Select term</option>';
 
-      var max_term = AGE_LIMIT - parseInt(age_val);
+      var max_term = 75 - parseInt(age_val);
       var min_term = 0;
 
       
@@ -354,7 +372,7 @@ $(document).ready(function(){
             var s_age = parseInt(age.val()) + ( parseInt(ui.value) - 2 );
 
             var last_age = 0;
-            if( plan.val() == 814 || plan.val() == 827)
+            if( plan.val() == 814)
             {
               last_age = 7;
             }
@@ -381,39 +399,35 @@ $(document).ready(function(){
                         console.log(response);
 
                         var risk_result = $(".risk_result");
-                        
-                        
+                        risk_result.show();
+
+                        // change formula label 
                         if( plan.val() == 814 )
                         {
-                          risk_result.empty().html(response.rc_template).show();
-                          
-                          if( (parseInt(ui.value) - 1) >= 16 )
-                          {
-                              $(".d_fab_amount").parentsUntil("tr").show();
-                          }
-                          else
-                          {
-                              $(".d_fab_amount").parentsUntil("tr").hide();
-                          }
+                          $("#death_occures_formula_text").html('<b>(SA + Bonus + FAB)</b>');  
                         }
                         else if( plan.val() == 815 )
                         {
-                          risk_result.empty().html(response.rc_template).show();
-
-                          if( (parseInt(ui.value) - 1) >= 16 )
-                          {
-                              $(".d_fab_amount").parentsUntil("tr").show();
-                          }
-                          else
-                          {
-                              $(".d_fab_amount").parentsUntil("tr").hide();
-                          }
-                        }
-                        else if( plan.val() == 827 )
-                        {
-                          risk_result.empty().html(response.rc_template).show();
+                          $("#death_occures_formula_text").html('<b>(BSA + Bonus + FAB)</b>');
                         }
                         
+
+                        $("#s_age").text(s_age);
+                        $("#bsa").text( "Rs. "+ response.bsa );
+                        $("#dsa").text( "Rs. "+ response.dsa );
+                        $(".d_bonus_amount").text( " + Rs. "+ response.d_bonus_amount);
+                        $(".d_fab_amount").text( " + Rs. "+response.d_fab_amount);
+                        $("#normal_risk_cover").text( " = Rs. "+ response.normal_risk_cover);
+                        $("#accident_risk_cover").text( " = Rs. "+ response.accident_risk_cover);
+
+                        if( (parseInt(ui.value) - 1) >= 16 )
+                        {
+                            $(".d_fab_amount").parentsUntil("tr").show();
+                        }
+                        else
+                        {
+                            $(".d_fab_amount").parentsUntil("tr").hide();
+                        }
                         
                     },
                     failure:function(data){
@@ -470,24 +484,18 @@ $(document).ready(function(){
       {
           sa.addClass('border-danger');
           return false; 
-      } 
-      else if( sa.val() < MIN_SA )
-      {
-          sa.addClass('border-danger');
-          $("#sa_err").text("Minimum Sum Assured is "+MIN_SA).show();
-          return false;
       }
-      else if( MAX_SA != 0 && sa.val() > MAX_SA )
+      else if( sa.val() < 100000 )
       {
           sa.addClass('border-danger');
-          $("#sa_err").text("Maximum Sum Assured is "+MAX_SA).show();
+          $("#sa_err").text(MIN_SA_ERR).show();
           return false;
       }
       else
       {
-          if( sa.val() > MIN_SA )
+          if( sa.val() > 100000 )
           {
-              var amt = parseInt(sa.val()) - MIN_SA;
+              var amt = parseInt(sa.val()) - 100000;
               
               if( ( amt % 5000 ) !== 0 ) 
               {
@@ -550,61 +558,30 @@ $(document).ready(function(){
                     $("#monthly_prem_later").text("Rs. " + data.monthly_prem_later);
 
                     $("#txtSA2").text(data.amount);
-
-
-                    // change maturity formula label 
-                    if( plan.val() == 814 )
+                    $("#txtBonusAmount").text(data.bonus_amount);
+                    if(data.fab_amount == 0)
                     {
-                      $("#maturity_benefit_formula").html('Maturity Benefit <br>= SA <br>+ Bonus <br>+ FAB');
-                      $("#txtBonusAmount").parent().show();
-                      $("#txtBonusAmount").text(data.bonus_amount);
-                      $("#txtLAAmount").parent().hide();
-                      $("#txtBonus").text(data.bonus);
-                      if(data.fab == 0)  
-                      {
-                        $("#txtFAB").parent().hide();
-                        $("#txtFABAmount").parent().hide();
-                      }
-                      else
-                      {
-                        $("#txtFAB").parent().show();
-                        $("#txtFAB").text(data.fab);
-                        $("#txtFABAmount").parent().show();
-                        $("#txtFABAmount").text(data.fab_amount+"*");    
-                      } 
-                      $("#txtLA").parent().hide();
+                      $("#txtFABAmount").parent().hide();
                     }
-                    else if( plan.val() == 815 )
+                    else
                     {
-                      $("#maturity_benefit_formula").html('Maturity Benefit <br>= SA <br>+ Bonus <br>+ FAB');
-                      $("#txtBonusAmount").parent().show();
-                      $("#txtBonusAmount").text(data.bonus_amount);
-                      $("#txtLAAmount").parent().hide();
-                      $("#txtBonus").text(data.bonus);
-                    
-                      $("#txtFAB").parent().show();
-                      $("#txtFAB").text(data.fab); 
                       $("#txtFABAmount").parent().show();
-                      $("#txtFABAmount").text(data.fab_amount+"*"); 
-                      $("#txtLA").parent().hide(); 
-                    }
-                    else if( plan.val() == 827 )
-                    {
-                      $("#maturity_benefit_formula").html('Maturity Benefit <br>= SA <br>+ LA');
-                      $("#txtLAAmount").parent().show();
-                      $("#txtLAAmount").text(data.la_amount);
-                      $("#txtBonusAmount").parent().hide();
-
-                      $("#txtLA").text(data.la);
-                      $("#txtLA").parent().show();
-                      $("#txtBonus").parent().hide();
-                      $("#txtFAB").parent().hide();
+                      $("#txtFABAmount").text(data.fab_amount+"*");  
                     }
                     
                     $("#txtMaturityBenefit").text(data.maturity_benefit+"*");
                     $("#txtExtendBenefit").text(data.extended_benefit);
 
-                    
+                    $("#txtBonus").text(data.bonus);
+                    if(data.fab == 0)  
+                    {
+                      $("#txtFAB").parent().hide();
+                    }
+                    else
+                    {
+                      $("#txtFAB").parent().show();
+                      $("#txtFAB").text(data.fab);  
+                    }
                     
                 },
                 failure:function(data){

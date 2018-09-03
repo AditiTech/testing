@@ -147,6 +147,84 @@ if( isset($_POST['formType']) && $_POST['formType'] != '')
 		$data['monthly_prem_later'] = $obj815->IND_money_format($obj815->monthly_prem_later);
 
 	}
+	else if( $_POST['plan'] == 827 )
+	{
+		// jeevan rakshak
+
+		$obj827 = new Plan_827();
+
+		$obj827->plan = 827;
+
+		$obj827->name =   $_POST['name'];
+		$obj827->age = $_POST['age'];
+		$obj827->amount  = $_POST['sa'];
+		$obj827->term  = $_POST['term'];
+		$obj827->extended_benefit = $obj827->amount;
+
+
+		$obj827->cal_tp();
+
+		$data['tp'] = $obj827->tp;
+
+		$obj827->cal_sa();
+
+		$obj827->cal_accidental_benefit();	
+
+		$obj827->cal_rebate();
+
+		//yearly
+		$obj827->cal_yearly_premium();
+
+		
+		//half yearly
+		$obj827->cal_half_yearly_premium();
+
+
+		// Quarterly
+		$obj827->cal_quarterly_premium();
+
+
+		// Monthly
+		$obj827->cal_monthly_premium();
+
+
+		// bonus calculation
+		$obj827->cal_bonus();
+
+		// FAB calculation
+		$obj827->cal_fab();
+
+		// Loyalty Addition
+		$obj827->cal_la();
+
+		// Maturity benefit calculation
+		$obj827->cal_maturity_benefit();
+
+		
+		$data['name'] = $obj827->name;
+		$data['age'] = $obj827->age;
+		$data['sa'] = $obj827->sa;
+		$data['amount'] = $obj827->IND_money_format($obj827->amount);
+		$data['term'] = $obj827->term;
+		$data['bonus'] = $obj827->bonus;
+		$data['bonus_amount'] = $obj827->IND_money_format($obj827->bonus_amount);
+		$data['fab'] = $obj827->fab;
+		$data['fab_amount'] = $obj827->IND_money_format($obj827->fab_amount);
+		$data['la'] = $obj827->IND_money_format($obj827->la);
+		$data['la_amount'] = $obj827->IND_money_format($obj827->la_amount);
+		$data['maturity_benefit'] = $obj827->IND_money_format($obj827->maturity_benefit);
+		$data['extended_benefit'] = $obj827->IND_money_format($obj827->extended_benefit);
+
+		$data['yearly_prem_first'] = $obj827->IND_money_format($obj827->yearly_prem_first);
+		$data['yearly_prem_later'] = $obj827->IND_money_format($obj827->yearly_prem_later);
+		$data['half_prem_first'] = $obj827->IND_money_format($obj827->half_prem_first);
+		$data['half_prem_later'] = $obj827->IND_money_format($obj827->half_prem_later);
+		$data['quarterly_prem_first'] = $obj827->IND_money_format($obj827->quarterly_prem_first);
+		$data['quarterly_prem_later'] = $obj827->IND_money_format($obj827->quarterly_prem_later);
+		$data['monthly_prem_first'] = $obj827->IND_money_format($obj827->monthly_prem_first);
+		$data['monthly_prem_later'] = $obj827->IND_money_format($obj827->monthly_prem_later);
+	}
+
 	
 
 
