@@ -266,6 +266,8 @@ $(document).ready(function(){
       var plan_val = plan.val();
       var opt = '<option value="">Select age</option>';
 
+      $(".risk_result").hide();
+
       if( plan_val !== '' ) {
 
           if( plan_val == '814') 
@@ -306,6 +308,7 @@ $(document).ready(function(){
       var max_term = AGE_LIMIT - parseInt(age_val);
       var min_term = 0;
 
+      $(".risk_result").hide();
       
       if( age_val != 'Select age' )
       {
@@ -322,6 +325,9 @@ $(document).ready(function(){
 
   });
 
+  term.change(function(){
+    $(".risk_result").hide();
+  });
 
 
   function change_slider(age_x, term_y)
@@ -350,7 +356,7 @@ $(document).ready(function(){
             labels: doubleLabels
         })
         .on("slidechange", function(e,ui) {
-            
+
             var s_age = parseInt(age.val()) + ( parseInt(ui.value) - 2 );
 
             var last_age = 0;
@@ -435,6 +441,8 @@ $(document).ready(function(){
   $("#btn-submit").click(function(e){
 
       e.preventDefault();
+
+
 
       if( plan.val() == '')
       {
