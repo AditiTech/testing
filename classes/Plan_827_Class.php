@@ -159,6 +159,19 @@ class Plan_827 extends Endowment
         }
 
         $this->normal_risk_cover = $this->higher_amt + $this->la_amount;
+
+        
+        if( $this->age >= 18 )
+        {
+            $this->dsa = 2 * $this->amount;
+            $this->accident_risk_cover = $this->dsa + $this->la_amount;    
+        }
+        else
+        {
+            $this->dsa = 0;
+            $this->accident_risk_cover = 0;
+        }
+        
     }
 
     public function risk_cover_table()
@@ -172,7 +185,7 @@ class Plan_827 extends Endowment
             <td><b>If death occurs at age <span id="s_age">'.$this->age.'</span></b></td>
           </tr>
           <tr>
-            <td class="text-blue" id="death_occures_formula_text"><b>(Higher of Basic Sum Assured or 10 times of annualised premium or 105% of total premiums paid) plus loyalty addition, if any) + LA </b></td>
+            <td class="text-blue" id="death_occures_formula_text"><b>(BSA + LA)  </b></td>
           </tr>
           <tr>
             <td><b><span id="bsa"> Rs. '.$this->IND_money_format($this->higher_amt).'</span></b></td>
@@ -185,6 +198,26 @@ class Plan_827 extends Endowment
           </tr>
           </tbody>
           </table>
+
+          <table class="table table-bordered table-responsive col-6 border-0 text-white text-center tab_accident_death">
+          <tbody class="bg-danger ">
+          <tr>
+            <td><b>In case of accidental death</b></td>
+          </tr>
+          <tr>
+            <td class="text-yellow"><b>(DSA + LA)</b></td>
+          </tr>
+          <tr>
+            <td><b><span id="dsa"> Rs. '.$this->IND_money_format($this->dsa).'</span></b></td>
+          </tr>
+          <tr>
+            <td><b><span class="d_la_amount" > + Rs. '.$this->IND_money_format($this->la_amount).'</span></b></td>
+          </tr>
+          <tr>
+            <td><b><span id="accident_risk_cover" > = Rs. '.$this->IND_money_format($this->accident_risk_cover).'</span></b></td>
+          </tr>
+          </tbody>
+        </table>
       </div>';
 
         return $rc_template;
